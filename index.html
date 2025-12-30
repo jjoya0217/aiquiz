@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global AI & Semiconductor Ticket Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 95vw;
+            max-width: 1800px;
+            aspect-ratio: 16 / 9;
+            padding: 2.5vw;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2vw;
+        }
+
+        .header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3vw;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5vw;
+        }
+
+        .header p {
+            font-size: 1.2vw;
+            color: #a0aec0;
+            font-weight: 400;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5vw;
+            flex: 1;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2vw;
+        }
+
+        .column-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1vw;
+            border-radius: 1vw;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .column-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6vw;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .card {
+            background: rgba(30, 30, 60, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.2vw;
+            padding: 1.5vw;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            min-height: 8vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-0.3vw);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 1vw 3vw rgba(102, 126, 234, 0.3);
+        }
+
+        .card.revealed {
+            background: rgba(50, 50, 90, 0.8);
+            border-color: rgba(102, 126, 234, 0.6);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4vw 1vw;
+            border-radius: 2vw;
+            font-size: 0.9vw;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 0.8vw;
+            letter-spacing: 0.05em;
+        }
+
+        .badge.us {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            color: white;
+        }
+
+        .badge.non-us {
+            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+            color: white;
+        }
+
+        .company-name {
+            font-size: 1.8vw;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 0.6vw;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(1vw);
+            transition: all 0.5s ease;
+        }
+
+        .card.revealed .company-name {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .company-desc {
+            font-size: 1vw;
+            color: #cbd5e0;
+            margin-bottom: 0.6vw;
+            opacity: 0;
+            transform: translateY(1vw);
+            transition: all 0.5s ease 0.1s;
+            line-height: 1.4;
+        }
+
+        .card.revealed .company-desc {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .company-value {
+            font-size: 1.3vw;
+            font-weight: 700;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            transform: translateY(1vw);
+            transition: all 0.5s ease 0.2s;
+        }
+
+        .card.revealed .company-value {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .placeholder {
+            text-align: center;
+            font-size: 4vw;
+            color: rgba(255, 255, 255, 0.15);
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .card.revealed .placeholder {
+            opacity: 0;
+            display: none;
+        }
+
+        .content {
+            opacity: 0;
+            display: none;
+        }
+
+        .card.revealed .content {
+            opacity: 1;
+            display: block;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 1vw;
+            right: 1vw;
+            display: flex;
+            gap: 0.5vw;
+            z-index: 1000;
+        }
+
+        .btn {
+            padding: 0.6vw 1.2vw;
+            border: none;
+            border-radius: 0.5vw;
+            font-size: 0.9vw;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Outfit', sans-serif;
+            opacity: 0.7;
+        }
+
+        .btn:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .btn-reveal {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-reset {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .container {
+            animation: fadeIn 0.6s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>글로벌 AI & 반도체 핵심 기업</h1>
+            <p>국가 구분 + 시가총액 (원화)</p>
+        </div>
+
+        <div class="grid">
+            <!-- Software Column -->
+            <div class="column">
+                <div class="column-header">
+                    <h2>Software</h2>
+                </div>
+                
+                <div class="card" data-company="microsoft">
+                    <div class="placeholder">?</div>
+                    <div class="content">
+                        <span class="badge us">US</span>
+                        <div class="company-name">Microsoft</div>
+                        <div class="company-desc">AI 플랫폼·클라우드·생산성 SW</div>
+                        <div class="company-value">약 5,200조 원</div>
+                    </div>
+                </div>
+
+                <div class="card" data-company="alphabet">
+                    <div class="placeholder">?</div>
+                    <div class="content">
+                        <span class="badge us">US</span>
+                        <div class="company-name">Alphabet</div>
+                        <div class="company-desc">AI·모델·검색·플랫폼</div>
+                        <div class="company-value">약 5,500조 원</div>
+                    </div>
+                </div>
+
+                <div class="card" data-company="amazon">
+                    <div class="placeholder">?</div>
+                    <div class="content">
+                        <span class="badge us">US</span>
+                        <div class="company-name">Amazon</div>
+                        <div class="company-desc">클라우드·AI·인프라</div>
+                        <div class="company-value">약 3,600조 원</div>
+                    </div>
+                </div>
+
+                <div class="card" data-company="meta">
+                    <div class="placeholder">?</div>
+                    <div class="content">
+                        <span class="badge us">US</span>
+                        <div class="company-name">Meta</div>
+                        <div class="company-desc">추천·광고·AI·플랫폼</div>
+                        <div class="company-value">약 2,400조 원</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Software + Hardware Column -->
+            <div class="column">
+                <div class="column-header">
+                    <h2>Software + Hardware</h2>
+                </div>
+
+                <div class="card" data-company="apple">
+                    <div class="placeholder">?</div>
+                    <div class="content">
+                        <span class="badge us">US</span>
+                        <div class="company-name">Apple</div>
+                        <div class="company-desc">디바이스·OS·온디바이스 AI</div>
+                        <div class="company-value">약 5,800조 원</div>
+                    </div>
+                </div>
+
+                <div class="card" data-company="samsung">
+                    <div class="placeholder">?</div>
+                    <div class="content">
+                        <span class="badge non-us">NON-US</span>
+                        <div class="company-name">Samsung Electronics</div>
+                        <div class="company-desc">메모리·파운드리·디바이스</div>
+                        <div class="company-value">약 770조 원</div>
+                    </div>
+                </div>
+
+                <div class="card" data-company="tesla">
+                    <div class="placeholder">?</div>
+                    <div class="content">
+                        <span class="badge us">US</span>
+                        <div class="company-name">Tesla</div>
+                        <div class="company-desc">자율주행·로봇·전기차</div>
+                        <div class="company-value">약 2,200조 원</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hardware Column -->
+            <div class="column">
+                <div class="column-header">
+                    <h2>Hardware</h2>
+                </div>
+
+                <div class="card" data-company="nvidia">
+                    <div class="placeholder">?</div>
+                    <div class="content">
+                        <span class="badge us">US</span>
+                        <div class="company-name">NVIDIA</div>
+                        <div class="company-desc">AI GPU·가속기(반도체 핵심)</div>
+                        <div class="company-value">약 6,600조 원</div>
+                    </div>
+                </div>
+
+                <div class="card" data-company="tsmc">
+                    <div class="placeholder">?</div>
+                    <div class="content">
+                        <span class="badge non-us">NON-US</span>
+                        <div class="company-name">TSMC</div>
+                        <div class="company-desc">칩 파운드리(3nm,2nm)</div>
+                        <div class="company-value">약 2,200조 원</div>
+                    </div>
+                </div>
+
+                <div class="card" data-company="asml">
+                    <div class="placeholder">?</div>
+                    <div class="content">
+                        <span class="badge non-us">NON-US</span>
+                        <div class="company-name">ASML</div>
+                        <div class="company-desc">EUV 노광장비(독점)</div>
+                        <div class="company-value">약 590조 원</div>
+                    </div>
+                </div>
+
+                <div class="card" data-company="broadcom">
+                    <div class="placeholder">?</div>
+                    <div class="content">
+                        <span class="badge us">US</span>
+                        <div class="company-name">Broadcom</div>
+                        <div class="company-desc">AI 인프라·네트워크·반도체</div>
+                        <div class="company-value">약 2,400조 원</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn btn-reveal" onclick="revealAll()">전체 공개</button>
+        <button class="btn btn-reset" onclick="resetAll()">초기화</button>
+    </div>
+
+    <script>
+        // 각 카드 클릭 이벤트
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                if (!this.classList.contains('revealed')) {
+                    this.classList.add('revealed');
+                }
+            });
+        });
+
+        // 전체 공개
+        function revealAll() {
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.add('revealed');
+            });
+        }
+
+        // 초기화
+        function resetAll() {
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove('revealed');
+            });
+        }
+
+        // 키보드 단축키 (선택사항)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'r' || e.key === 'R') {
+                resetAll();
+            } else if (e.key === 'a' || e.key === 'A') {
+                revealAll();
+            }
+        });
+    </script>
+</body>
+</html>
