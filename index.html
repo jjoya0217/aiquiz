@@ -58,14 +58,14 @@
         .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5vw;
+            gap: 1.2vw;
             flex: 1;
         }
 
         .column {
             display: flex;
             flex-direction: column;
-            gap: 1.2vw;
+            gap: 0.9vw;
         }
 
         .column-header {
@@ -129,12 +129,12 @@
 
         .badge {
             display: inline-block;
-            padding: 0.4vw 1vw;
+            padding: 0.3vw 0.8vw;
             border-radius: 2vw;
-            font-size: 0.9vw;
+            font-size: 0.85vw;
             font-weight: 700;
             font-family: 'Outfit', sans-serif;
-            margin-bottom: 0.8vw;
+            margin-bottom: 0.5vw;
             letter-spacing: 0.05em;
         }
 
@@ -149,10 +149,10 @@
         }
 
         .company-name {
-            font-size: 1.8vw;
+            font-size: 1.7vw;
             font-weight: 800;
             font-family: 'Outfit', sans-serif;
-            margin-bottom: 0.6vw;
+            margin-bottom: 0.4vw;
             color: #fff;
             opacity: 0;
             transform: translateY(1vw);
@@ -312,8 +312,10 @@
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">Alphabet</div>
-                        <div class="company-desc">AI·모델·검색·플랫폼</div>
-                        <div class="company-value">약 5,500조 원</div>
+                        <div class="info-row">
+                            <div class="company-desc">AI·모델·검색·플랫폼</div>
+                            <div class="company-value">약 5,500조 원</div>
+                        </div>
                     </div>
                 </div>
 
@@ -322,8 +324,10 @@
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">Amazon</div>
-                        <div class="company-desc">클라우드·AI·인프라</div>
-                        <div class="company-value">약 3,600조 원</div>
+                        <div class="info-row">
+                            <div class="company-desc">클라우드·AI·인프라</div>
+                            <div class="company-value">약 3,600조 원</div>
+                        </div>
                     </div>
                 </div>
 
@@ -332,8 +336,10 @@
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">Meta</div>
-                        <div class="company-desc">추천·광고·AI·플랫폼</div>
-                        <div class="company-value">약 2,400조 원</div>
+                        <div class="info-row">
+                            <div class="company-desc">추천·광고·AI·플랫폼</div>
+                            <div class="company-value">약 2,400조 원</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -349,8 +355,10 @@
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">Apple</div>
-                        <div class="company-desc">디바이스·OS·온디바이스 AI</div>
-                        <div class="company-value">약 5,800조 원</div>
+                        <div class="info-row">
+                            <div class="company-desc">디바이스·OS·온디바이스 AI</div>
+                            <div class="company-value">약 5,800조 원</div>
+                        </div>
                     </div>
                 </div>
 
@@ -359,8 +367,10 @@
                     <div class="content">
                         <span class="badge non-us">NON-US</span>
                         <div class="company-name">Samsung Electronics</div>
-                        <div class="company-desc">메모리·파운드리·디바이스</div>
-                        <div class="company-value">약 770조 원</div>
+                        <div class="info-row">
+                            <div class="company-desc">메모리·파운드리·디바이스</div>
+                            <div class="company-value">약 770조 원</div>
+                        </div>
                     </div>
                 </div>
 
@@ -369,8 +379,10 @@
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">Tesla</div>
-                        <div class="company-desc">자율주행·로봇·전기차</div>
-                        <div class="company-value">약 2,200조 원</div>
+                        <div class="info-row">
+                            <div class="company-desc">자율주행·로봇·전기차</div>
+                            <div class="company-value">약 2,200조 원</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -386,8 +398,10 @@
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">NVIDIA</div>
-                        <div class="company-desc">AI GPU·가속기(반도체 핵심)</div>
-                        <div class="company-value">약 6,600조 원</div>
+                        <div class="info-row">
+                            <div class="company-desc">AI GPU·가속기(반도체 핵심)</div>
+                            <div class="company-value">약 6,600조 원</div>
+                        </div>
                     </div>
                 </div>
 
@@ -396,8 +410,10 @@
                     <div class="content">
                         <span class="badge non-us">NON-US</span>
                         <div class="company-name">TSMC</div>
-                        <div class="company-desc">칩 파운드리(3nm,2nm)</div>
-                        <div class="company-value">약 2,200조 원</div>
+                        <div class="info-row">
+                            <div class="company-desc">칩 파운드리(3nm,2nm)</div>
+                            <div class="company-value">약 2,200조 원</div>
+                        </div>
                     </div>
                 </div>
 
@@ -406,8 +422,10 @@
                     <div class="content">
                         <span class="badge non-us">NON-US</span>
                         <div class="company-name">ASML</div>
-                        <div class="company-desc">EUV 노광장비(독점)</div>
-                        <div class="company-value">약 590조 원</div>
+                        <div class="info-row">
+                            <div class="company-desc">EUV 노광장비(독점)</div>
+                            <div class="company-value">약 590조 원</div>
+                        </div>
                     </div>
                 </div>
 
@@ -416,8 +434,10 @@
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">Broadcom</div>
-                        <div class="company-desc">AI 인프라·네트워크·반도체</div>
-                        <div class="company-value">약 2,400조 원</div>
+                        <div class="info-row">
+                            <div class="company-desc">AI 인프라·네트워크·반도체</div>
+                            <div class="company-value">약 2,400조 원</div>
+                        </div>
                     </div>
                 </div>
             </div>
