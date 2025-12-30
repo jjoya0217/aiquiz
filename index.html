@@ -16,17 +16,17 @@
             font-family: 'Noto Sans KR', 'Outfit', sans-serif;
             background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             color: #fff;
-            overflow: hidden;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 2vw 0;
         }
 
         .container {
             width: 95vw;
             max-width: 1800px;
-            aspect-ratio: 16 / 9;
+            min-height: calc(95vw * 9 / 16);
             padding: 2.5vw;
             display: flex;
             flex-direction: column;
@@ -88,13 +88,13 @@
             background: rgba(30, 30, 60, 0.6);
             border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 1.2vw;
-            padding: 1.5vw;
+            padding: 1.2vw;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(10px);
-            min-height: 8vw;
+            min-height: 6vw;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -165,13 +165,13 @@
         }
 
         .company-desc {
-            font-size: 1vw;
+            font-size: 0.95vw;
             color: #cbd5e0;
-            margin-bottom: 0.6vw;
             opacity: 0;
             transform: translateY(1vw);
             transition: all 0.5s ease 0.1s;
             line-height: 1.4;
+            flex: 1;
         }
 
         .card.revealed .company-desc {
@@ -180,7 +180,7 @@
         }
 
         .company-value {
-            font-size: 1.3vw;
+            font-size: 1.2vw;
             font-weight: 700;
             background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
             -webkit-background-clip: text;
@@ -189,6 +189,15 @@
             opacity: 0;
             transform: translateY(1vw);
             transition: all 0.5s ease 0.2s;
+            white-space: nowrap;
+            margin-left: 1vw;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1vw;
         }
 
         .card.revealed .company-value {
@@ -291,8 +300,10 @@
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">Microsoft</div>
-                        <div class="company-desc">AI 플랫폼·클라우드·생산성 SW</div>
-                        <div class="company-value">약 5,200조 원</div>
+                        <div class="info-row">
+                            <div class="company-desc">AI 플랫폼·클라우드·생산성 SW</div>
+                            <div class="company-value">약 5,200조 원</div>
+                        </div>
                     </div>
                 </div>
 
