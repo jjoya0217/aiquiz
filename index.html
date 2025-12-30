@@ -75,6 +75,19 @@
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .column-header:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .column-header.revealed {
+            background: rgba(50, 50, 90, 0.6);
+            border-color: rgba(102, 126, 234, 0.6);
         }
 
         .column-header h2 {
@@ -82,6 +95,25 @@
             font-size: 1.6vw;
             font-weight: 600;
             color: #fff;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .column-header.revealed h2 {
+            opacity: 1;
+        }
+
+        .column-header .header-placeholder {
+            text-align: center;
+            font-size: 4vw;
+            color: rgba(255, 255, 255, 0.15);
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .column-header.revealed .header-placeholder {
+            opacity: 0;
+            display: none;
         }
 
         .card {
@@ -291,12 +323,13 @@
         <div class="grid">
             <!-- Software Column -->
             <div class="column">
-                <div class="column-header">
+                <div class="column-header" onclick="this.classList.add('revealed')">
+                    <div class="header-placeholder">?</div>
                     <h2>Software</h2>
                 </div>
                 
                 <div class="card" data-company="microsoft">
-                    <div class="placeholder">?</div>
+                    <div class="placeholder">A-1</div>
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">Microsoft</div>
@@ -308,7 +341,7 @@
                 </div>
 
                 <div class="card" data-company="alphabet">
-                    <div class="placeholder">?</div>
+                    <div class="placeholder">A-2</div>
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">Alphabet</div>
@@ -320,7 +353,7 @@
                 </div>
 
                 <div class="card" data-company="amazon">
-                    <div class="placeholder">?</div>
+                    <div class="placeholder">A-3</div>
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">Amazon</div>
@@ -332,7 +365,7 @@
                 </div>
 
                 <div class="card" data-company="meta">
-                    <div class="placeholder">?</div>
+                    <div class="placeholder">A-4</div>
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">Meta</div>
@@ -346,12 +379,13 @@
 
             <!-- Software + Hardware Column -->
             <div class="column">
-                <div class="column-header">
+                <div class="column-header" onclick="this.classList.add('revealed')">
+                    <div class="header-placeholder">?</div>
                     <h2>Software + Hardware</h2>
                 </div>
 
                 <div class="card" data-company="apple">
-                    <div class="placeholder">?</div>
+                    <div class="placeholder">B-1</div>
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">Apple</div>
@@ -363,7 +397,7 @@
                 </div>
 
                 <div class="card" data-company="samsung">
-                    <div class="placeholder">?</div>
+                    <div class="placeholder">B-2</div>
                     <div class="content">
                         <span class="badge non-us">NON-US</span>
                         <div class="company-name">Samsung Electronics</div>
@@ -375,7 +409,7 @@
                 </div>
 
                 <div class="card" data-company="tesla">
-                    <div class="placeholder">?</div>
+                    <div class="placeholder">B-3</div>
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">Tesla</div>
@@ -389,12 +423,13 @@
 
             <!-- Hardware Column -->
             <div class="column">
-                <div class="column-header">
+                <div class="column-header" onclick="this.classList.add('revealed')">
+                    <div class="header-placeholder">?</div>
                     <h2>Hardware</h2>
                 </div>
 
                 <div class="card" data-company="nvidia">
-                    <div class="placeholder">?</div>
+                    <div class="placeholder">C-1</div>
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">NVIDIA</div>
@@ -406,7 +441,7 @@
                 </div>
 
                 <div class="card" data-company="tsmc">
-                    <div class="placeholder">?</div>
+                    <div class="placeholder">C-2</div>
                     <div class="content">
                         <span class="badge non-us">NON-US</span>
                         <div class="company-name">TSMC</div>
@@ -418,7 +453,7 @@
                 </div>
 
                 <div class="card" data-company="asml">
-                    <div class="placeholder">?</div>
+                    <div class="placeholder">C-3</div>
                     <div class="content">
                         <span class="badge non-us">NON-US</span>
                         <div class="company-name">ASML</div>
@@ -430,7 +465,7 @@
                 </div>
 
                 <div class="card" data-company="broadcom">
-                    <div class="placeholder">?</div>
+                    <div class="placeholder">C-4</div>
                     <div class="content">
                         <span class="badge us">US</span>
                         <div class="company-name">Broadcom</div>
@@ -464,12 +499,18 @@
             document.querySelectorAll('.card').forEach(card => {
                 card.classList.add('revealed');
             });
+            document.querySelectorAll('.column-header').forEach(header => {
+                header.classList.add('revealed');
+            });
         }
 
         // 초기화
         function resetAll() {
             document.querySelectorAll('.card').forEach(card => {
                 card.classList.remove('revealed');
+            });
+            document.querySelectorAll('.column-header').forEach(header => {
+                header.classList.remove('revealed');
             });
         }
 
